@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Авторизация', () => {
 
   let userName = 'user123423123'
