@@ -1,5 +1,5 @@
-
+# Cypress_demoblaze
 
 Запуск Cypress:
-npm run cypress
-npx cypress open
+1. npm run cypress
+2. npx cypress open
