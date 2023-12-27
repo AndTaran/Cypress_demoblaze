@@ -1,42 +1,26 @@
 /// <reference types="cypress" />
+import { authorizations } from "../../support/pages/authorization"
+import { basePage } from "../../support/pages/basePage"
 
 describe('Авторизация', () => {
 
-  let userName = 'user123423123'
-  let password = '12345678'
-
-  before(() => {
-    cy.clearAllCookies()
-    cy.clearAllLocalStorage()
-    cy.clearAllSessionStorage()
-  })
-
-  //
   beforeEach(() => {
-    cy.viewport(1920, 1080)
-    cy.visit('index.html', { failOnStatusCode: false })
+    basePage.open('index.html', 1920, 1080)
   })
 
   it('1. Проверка заголовка на главной странице', () => {
-    cy.get('.navbar-brand').should('contains.text', 'PRODUCT STORE')
+    basePage.checkTitle('PRODUCT STORE')
   })
 
   it('2. Проверка открытия окна авторизации', () => {
-    cy.get('#login2').click()
+    authorizations.checkOpenAuthorizations()
   })
 
   it('3. Проверка авторизации', () => {
-    cy.get('#login2')
-      .click()
-      .wait(2000)
-    cy.get('#loginusername')
-      .type(userName, { waitForAnimations: true })
-    cy.get('#loginpassword')
-      .type(password, { waitForAnimations: true })
-    cy.get('#logInModal > .modal-dialog > .modal-content > .modal-footer > .btn-primary')
-      .click()
-    cy.get('#nameofuser')
-      .should('contain.text', 'Welcome ' + userName)
+    const userName = 'user123423123'
+    const password = '12345678'
+
+    authorizations.checkAuthorizations(userName, password)
   })
 
 })
